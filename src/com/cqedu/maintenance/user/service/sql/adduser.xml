@@ -15,7 +15,7 @@
 		on a.rno=b.rno
 		join t_permission c
 		on b.pno=c.pno
-		where name=#username# and password=#password#
+		where a.name=#username# and a.password=#password#
 	</select>
 	
 	<!-- 删除数据库的数据
