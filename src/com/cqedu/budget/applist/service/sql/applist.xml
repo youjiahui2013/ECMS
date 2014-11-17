@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="select-unit" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
-		select bunitid as bunitid,bname as bunitname from t_buget_unit
+		select t.bunitid as bunitid,t.bname as bunitname from t_buget_unit t
 	</select>
 	
 	<select id="select-appnum" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
@@ -44,7 +44,7 @@
 	</insert>
 	
 	<update id="update-detail-fee" parameterClass="com.cqedu.budget.applist.bean.Budgetapp">
-		update t_budget_detail set bfeeamount=#bfeeamount# where bunitid=#bunitid# and bdetlid=#bdetlid#
+		update t_budget_detail t set t.bfeeamount=#bfeeamount# where t.bunitid=#bunitid# and t.bdetlid=#bdetlid#
 	</update>
 	
 	<!-- 8-31 -->
