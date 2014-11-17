@@ -280,9 +280,4 @@ public class AppQueryAction extends ActionSupport {
 		this.newBudget = newBudget;
 	}
 
-
-
-
-	
-	
 }

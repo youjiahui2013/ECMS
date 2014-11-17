@@ -88,9 +88,6 @@ public class Budgetapp implements Serializable {
 		this.bperiod = bperiod;
 	}
 
-	public void setBsum(Integer bsum) {
-		this.bsum = bsum;
-	}
 	public long getBunitid() {
 		return bunitid;
 	}
