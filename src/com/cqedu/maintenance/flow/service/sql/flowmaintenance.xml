@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="flow">
+
+    <!-- 
+                     添加
+     -->
+	<insert id="add-flow" parameterClass="com.cqedu.bean.Flow">
+		insert into t_flow(fid,fname,ftype,maxseqno,isdelete) values(#fid#,#fname#,#ftype#,#maxseqno#,0) 
+		<selectKey resultClass="int" keyProperty="fid" type="pre">
+			select
+			seq_id.nextval as fid from dual 
+	 	</selectKey>
+	</insert>
+	
+	<!--
+		添加流程环节
+	-->
+	<insert id="add-flowSeq" parameterClass="com.cqedu.bean.FlowSeq">
+		insert into t_flowSeq(sid,fid,flowsequence,isdelete) values(#seq.sid#,#flow.fid#,#flowsequence#,0)
+	</insert>
+	
+	
+	
+	
+	<!-- 
+                    查询
+     -->
+		
+	<select id="query-flow" resultClass="com.cqedu.bean.Flow" parameterClass="com.cqedu.bean.Flow">
+		select * from t_flow where isdelete=0
+	</select>
+	
+	<!-- 
+                     依据ID查询
+     -->
+	
+	<select id="query-flowID" resultClass="com.cqedu.bean.Flow" parameterClass="com.cqedu.bean.Flow">
+		select * from t_flow where fid = #fid#
+	</select>
+	
+	<!--
+		修改
+	-->
+	<update id="update-flow" parameterClass="com.cqedu.bean.Flow">
+		update t_flow set fname=#fname#,ftype=#ftype#,maxseqno=#maxseqno# where fid=#fid#
+	</update>
+	
+	
+	<delete id="delete-flowSeq" parameterClass="com.cqedu.bean.Flow">
+		delete from t_flowseq where fid=#fid#
+	</delete>
+	
+	<insert id="update-flowSeq" parameterClass="com.cqedu.bean.FlowSeq">
+		insert into t_flowseq(sid,fid,flowsequence,isdelete) values(#seq.sid#,#flow.fid#,#flowsequence#,0)
+	</insert>
+	
+	
+	
+	
+	<!-- 
+                     删除
+     -->
+	<delete id="delete-flow" parameterClass="com.cqedu.bean.Flow">
+		update t_flow set isdelete=1 where fid=#fid#
+	</delete>
+	
+		
+	<!--
+		查询已有的审批人
+	-->
+	<select id="select-seqName" parameterClass="com.cqedu.bean.Seq" 
+		resultClass="com.cqedu.bean.Seq">
+		select name,sid from t_user
+	</select>
+	
+		
+	<!--
+		多表连接查询流程环节、审批流程、审批环节 
+	-->
+	<resultMap class="com.cqedu.bean.FlowSeq" id="flowResult">	
+		<result property="flowsequence" column="flowsequence"/>
+
+		
+		<result property="flow.fname" column="fname"/>
+		<result property="flow.ftype" column="ftype"/>
+
+		<result property="seq.name" column="name"/>
+		</resultMap>
+		
+	<select id="select-flowSeq" resultMap="flowResult" parameterClass="com.cqedu.bean.Flow">
+	 select a.fname,a.ftype,c.name,b.flowSequence
+      from t_flow a 
+      join t_flowSeq b 
+      on a.fID=b.fID and a.isdelete=0
+      join t_user c
+      on b.SID=c.SID
+      where b.isdelete=0 and a.fid = #fid#  order by a.fid asc,b.flowSequence asc
+	</select>
+	
+	
+	
+	
+	
+	
+	
+</sqlMap>

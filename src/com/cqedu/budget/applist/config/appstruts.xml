@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+    
+<struts>
+	<constant name="struts.i18n.encoding" value="GBK"/>
+	<constant name="struts.locale" value="zh_CN"></constant>
+	
+	<package name="applist" extends="struts-default">
+		<action name="query-applist" class="AppQueryAction" method="queryList">
+			<result>
+				/budget/budget_app_list.jsp
+			</result>
+		</action>
+		
+		<action name="buget-app" class="AppQueryAction" method="bugetApp">
+			<result name="success">
+				/budget/budget_app.jsp
+			</result>
+		</action>
+				
+		<action name="query-fee-detail" class="AppQueryAction" method="queryFeeDetl">
+			<result name="success">
+				/budget/ajax_budget_fee.jsp
+			</result>
+		</action>
+		
+		<action name="select-fee-detail" class="AppQueryAction" method="selectFeeDetl">
+			<result name="success">
+				/budget/ajax_budget_detl_fee.jsp
+			</result>
+		</action>
+		
+		<action name="insert-detail-fee" class="AppQueryAction" method="insertFeeDetl">
+			<result name="success">
+				/budget/budget_appr_tache.jsp
+			</result>
+		</action>
+		<!--
+		
+		<action name="update-detail-fee" class="AppQueryAction" method="updateFeeDetl">
+			<result name="success">
+				/budget/app_success.jsp
+			</result>
+		</action>
+		-->
+		
+		<!-- 8-31  -->
+		<action name="check-appr" class="AppQueryAction" method="queryApprList">
+			<result name="success">
+				/budget/budget_appr.jsp
+			</result>
+		</action>
+		
+		<action name="query-apprpro-his" class="AppQueryAction" method="queryApprPro">
+			<result name="success">
+				/budget/appr_pro_his.jsp
+			</result>
+		</action>
+		
+		<action name="query-appr-flow" class="AppQueryAction" method="queryFlow">
+			<result name="success">
+				/budget/budget_appr_tache.jsp
+			</result>
+		</action>
+		<action name="query-appr-unit" class="AppQueryAction" method="queryUnit">
+			<result name="success">
+				/budget/ajax_budget_appr_unit.jsp
+			</result>
+		</action>
+		
+		<action name="insert-flow-id" class="AppQueryAction" method="insertFid">
+			<result name="success">
+				/budget/app_success.jsp
+			</result>
+		</action>
+		
+		<action name="access-appr" class="AppQueryAction" method="accessAppr">
+			<result name="success">
+				/budget/app_success.jsp
+			</result>
+		</action>
+	</package>
+	
+</struts>

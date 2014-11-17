@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+    
+<struts>
+	<constant name="struts.i18n.encoding" value="GBK"/>
+	<constant name="struts.locale" value="zh_CN"></constant>
+	
+	<package name="finance" extends="struts-default">
+		<action name="query-fb-applist" class="FinanceAction" method="queryFbAppList">
+			<result name="success">
+				/finance/finance_budget_app_list.jsp
+			</result>
+		</action>
+		
+		<action name="query-fr-applist" class="FinanceAction" method="queryFrList">
+			<result name="success">
+				/finance/finance_reim_app_list.jsp
+			</result>
+		</action>
+	</package>
+	
+</struts>

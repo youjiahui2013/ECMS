@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+   
+	<package name="flow"  namespace="/flow" extends="struts-default" >
+	    
+	    <!-- 
+                     添加
+     -->
+    	<action name="add-flow" class="FlowAction" method="add">
+    		<result name="success">
+    			/maintenance/flow.jsp
+    		</result>
+    	</action>
+    	
+    	<!-- 
+                     查询
+     -->
+    	<action name="query-flow" class="FlowAction" method="queryFlow">
+    		<result name="success">
+    		/maintenance/flow-list.jsp
+    		</result>
+    	</action>
+    	
+    	<!-- 
+                     修改
+     -->
+    	<action name="update-flow" class="FlowAction" method="updateFlow">
+    		<result name="success">
+    		/maintenance/flow.jsp
+    		</result>
+    	</action>
+    	
+    	<!-- 
+                     依据ID查询
+     -->
+    	<action name="queryFlowID" class="FlowAction" method="queryFlowID">
+    		<result name="success">
+    		/maintenance/update-flow.jsp
+    		</result>
+    	</action>
+    	
+    	<!-- 
+                     删除
+     -->
+    	<action name="delete-flow" class="FlowAction" method="deleteFlow">
+    		<result name="success">
+    		/maintenance/flow.jsp
+    		</result>
+    	</action>
+    	
+    
+    	
+    	<!--
+			查询t_seq中的审批人
+		-->
+		<action name="query-seqName" class="FlowAction" method="querySeqName">
+			<result name="success">
+				/maintenance/appr_proc_manage.jsp
+    		</result>
+			<result name="error">
+				/error.jsp
+    		</result>
+		</action>
+    	
+    	    	
+    	<!--
+			查询审批流程环节
+		-->
+		<action name="query-flowSeq" class="FlowAction" method="queryFlowSeq">
+			<result name="success">
+				/maintenance/flow-detaillist.jsp
+    		</result>
+			<result name="error">
+				/error.jsp
+    		</result>
+		</action>
+    	
+        	
+    	
+    </package>	
+</struts>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="applist">
+	<select id="query-applist" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select d.id as uuid,a.bid as bid,a.bname as bname,a.bdate as bdate from t_budg_apply a
+		join
+		t_flow b
+		on a.fid=b.fid
+		join
+		t_flowseq c
+		on b.fid=c.fid
+		join
+		t_user d
+		on c.sid=d.sid
+		where d.id=#uuid# order by bid asc
+	</select>
+	
+	<select id="select-unit" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select bunitid as bunitid,bname as bunitname from t_buget_unit
+	</select>
+	
+	<select id="select-appnum" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select count(*) as appnum from t_budg_apply
+	</select>
+	<select id="select-detail-fee" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select BDETLNAME as bdname from t_budget_detail a
+		join t_buget_unit b
+		on a.bunitid=b.bunitid
+		where a.bunitid=#bunitid#
+	</select>
+	
+	<select id="select-all-fee" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select bdetlid as bdetlid,bdetlname as bdetlname,bfeeshow as bfeeshow from t_budget_detail
+		where bunitid=#bunitid#
+	</select>
+	
+	
+	<insert id="insert-budg-apply" parameterClass="com.cqedu.budget.applist.bean.Budgetapp">
+		insert into t_budg_apply(BNAME,bdate,bperiod,bsum,bremark) values (#bname#,#bdate#,#bperiod#,#bsum#,#bremark#)
+	</insert>
+	
+	<update id="update-detail-fee" parameterClass="com.cqedu.budget.applist.bean.Budgetapp">
+		update t_budget_detail set bfeeamount=#bfeeamount# where bunitid=#bunitid# and bdetlid=#bdetlid#
+	</update>
+	
+	<!-- 8-31 -->
+	<select id="check-appr" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select a.bdetlname as bdetlname,a.bfeeshow as bfeeshow,a.bfeeamount as bfeeamount,c.bname as bname,
+		c.bdate as bdate,c.bperiod as bperiod,c.bsum as bsum,c.bremark as bremark 
+		from t_budget_detail a join t_buget_unit b on a.bunitid=b.bunitid join t_budg_apply c on b.bid=c.bid and b.bid=#bid#
+	</select>
+	
+	<select id="check-app-detail" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select bid as bid,bname as bname,bdate as bdate,bperiod as bperiod,bsum as bsum,bremark as bremark from t_budg_apply where bid=#bid#
+	</select>
+	
+	<select id="query-apprpro-his" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select name as uname,adate as adate,aidea as appraddvice,isagreename as isagreename from t_user a
+		join t_apprpro_his b
+		on a.id=b.id
+		join t_agree c
+		on b.aagree=c.aagree
+		where bid=#bid#
+		
+	</select>
+	
+	
+	<select id="query-appr-flow" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select fname as fname,fid as fid from t_flow order by fid asc
+	</select>
+	
+	<select id="query-appr-unit" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select a.name as uname,c.flowsequence from t_user a
+		join
+		t_seq b
+		on a.sid=b.sid
+		join
+		t_flowseq c
+		on b.sid=c.sid
+		join
+		t_flow d
+		on d.fid=c.fid where d.fid=#fid# order by flowsequence asc
+	</select>
+	
+	<select id="select_uid" resultClass="com.cqedu.budget.applist.bean.Budgetapp">
+		select id as uuid from t_user where id=#uuid#
+	</select>
+	
+	<update id="insert-flow-id" parameterClass="com.cqedu.budget.applist.bean.Budgetapp">
+		update t_budg_apply set fid=#fid# where bid=#appnum#
+	</update>
+	
+	<insert id="insert-bid-ano" parameterClass="com.cqedu.budget.applist.bean.Budgetapp">
+		insert all into t_apprpro_his(id,bid,AAGREE,adate,aidea) values (id,bid,0,'无','无') select id,bid from t_user a
+    	join t_flowseq b on a.sid=b.sid
+    	join t_budg_apply c on c.fid=b.fid
+		where c.fid=#fid# and bid=#appnum#
+	</insert>
+	
+	<update id="update-arrp-proc" parameterClass="com.cqedu.budget.applist.bean.Budgetapp">
+		update t_apprpro_his set adate=#adate#,aidea=#appraddvice#,aagree=#isagree# where id=#uuid#
+	</update>
+		
+		
+	
+	</sqlMap>

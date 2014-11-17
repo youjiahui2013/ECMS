@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="GBK" />
+
+		<include file="com/cqedu/maintenance/user/config/user-struts.xml"></include>
+
+		<include file="com/cqedu/budget/applist/config/appstruts.xml"></include>
+		
+		<include file="com/cqedu/maintenance/flow/config/flow-struts.xml"></include>
+	
+		<include file="com/cqedu/reim/config/reimstruts.xml"></include>
+		
+		<include file="com/cqedu/finance/config/financestruts.xml"></include>
+		
+</struts>

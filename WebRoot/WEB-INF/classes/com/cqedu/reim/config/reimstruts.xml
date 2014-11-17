@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+    
+<struts>
+	<constant name="struts.i18n.encoding" value="GBK"/>
+	<constant name="struts.locale" value="zh_CN"></constant>
+	
+	<package name="reim" extends="struts-default">
+		<action name="reim-app" class="ReimAction" method="reimApp">
+			<result>
+				/reimbursement/reim_app.jsp
+			</result>
+		</action>
+		
+		<action name="query-reim-fee" class="ReimAction" method="queryRFeeDetail">
+			<result>
+				/reimbursement/ajax_reim_fee.jsp
+			</result>
+		</action>
+		
+		<action name="reim-fee-list" class="ReimAction" method="rFeeDetail">
+			<result>
+				/reimbursement/ajax_reim_detl_fee.jsp
+			</result>
+		</action>
+		
+		<action name="query-reim-applist" class="ReimAction" method="queryReimList">
+			<result>
+				/reimbursement/reim_app_list.jsp
+			</result>
+		</action>
+		
+		<action name="insert-reim-apply" class="ReimAction" method="insertRDetlFee">
+			<result>
+				/reimbursement/reim_appr_tache.jsp
+			</result>
+		</action>
+		
+		<action name="check-reim-appr" class="ReimAction" method="queryInfoList">
+	 		<result>
+	 			/reimbursement/reim_appr.jsp
+	 		</result>
+		</action>
+		
+		<action name="query-rappr-unit" class="ReimAction" method="queryRApprUnit">
+			<result>
+				/reimbursement/ajax_reim_appr_unit.jsp
+			</result>
+		</action>
+		
+<!-- 		<action name="insert-reim-fid" class="ReimAction" method="insertRFid">
+			<result>
+				/reimbursement/reim_app_seccess.jsp
+			</result>
+		</action> -->
+<!--	<action name="query-reim-flow" class="ReimAction" method="queryReimFlow">
+			<result>
+				/reimbursement/reim_appr_tache.jsp
+			</result>
+		</action> 
+-->
+		<action name="query-rappr-his" class="ReimAction" method="queryRApprHis">
+			<result>
+				/reimbursement/appr_pro_his.jsp
+			</result>
+		</action>
+		
+		<action name="insert-reim-fid" class="ReimAction" method="insertReimFid">
+			<result>
+				/reimbursement/reim_app_seccess.jsp
+			</result>
+		</action>
+		
+		<action name="reim-access-appr" class="ReimAction" method="reimAccessAppr">
+			<result>
+				/reimbursement/reim_app_seccess.jsp
+			</result>
+		</action>
+	</package>
+	
+</struts>

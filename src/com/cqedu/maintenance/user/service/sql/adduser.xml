@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="user">
+
+	<!--从数据库里选出输入的信息相同的信息
+	-->
+	<select id="select-user" parameterClass="com.cqedu.bean.User" resultClass="com.cqedu.bean.User">
+		select 
+		a.id as userid,a.NAME as username,a.PASSWORD as password,c.pname as posname from t_user a
+		join t_role b
+		on a.rno=b.rno
+		join t_permission c
+		on b.pno=c.pno
+		where name=#username# and password=#password#
+	</select>
+	
+	<!-- 删除数据库的数据
+	 -->
+	
+	
+	<!-- 向数据库中添加用户的信息 -->
+	<insert id="insert-user" parameterClass="com.cqedu.bean.User">
+		insert into t_user(ID,RNO,DID,POSITION_ID,NAME,PASSWORD,SEX,TELEPHONE,MAIL,BIRTHDAY,CODE,ADDRESS,IDNUM)
+		values(#userid#,#role.id#,#dept.id#,#posid#,#username#,#password#,#sexy#,#phone#,#email#,#borndate#,#code#,#address#,#idcardnum#)
+	</insert>
+	
+	
+	<!-- 向人员信息列表中插入数据 -->
+
+	 <select id="user-list"  resultClass="com.cqedu.bean.User">
+	 	select a.name as username,a.id as userid,b.dname as "dept.name",c.rname as "role.name"
+     		from t_user a
+     		join
+     		t_department b
+     		on a.did=b.did
+     		join
+     		t_role c
+     		on a.rno=c.rno
+	 </select>
+	 
+	<!-- 删除特定人员 -->
+	
+	<delete id="delete-user" parameterClass="com.cqedu.bean.User">
+		delete from t_user where id=#userid#
+	</delete>
+	
+	<!--选择符合要求的id的属性值 -->
+	
+	<select id="choose-user" resultClass="com.cqedu.bean.User" parameterClass="com.cqedu.bean.User">
+		select
+		a.ID as userid,a.RNO as "role.id",b.RNAME as "role.name",a.DID as "dept.id",c.DNAME as "dept.name",d.POSITION_ID as posid,d.POSITION_NAME as posname,a.NAME as username,a.PASSWORD as password,a.SEX as sexy,a.TELEPHONE as phone,a.MAIL as email,a.BIRTHDAY as borndate,a.CODE as code,a.ADDRESS as address,a.IDNUM as idcardnum,a.FEEID as feeid,e.FEENAME as feename
+		from t_user a
+		join
+		t_role b
+		on a.rno=b.rno
+		join t_department c
+		on a.did=c.did
+		join t_position d
+		on a.position_id=d.position_id
+		join t_fee e
+		on a.feeid=e.feeid
+		where a.ID=#userid#
+	</select>
+	
+	<!-- 更新表中特定行的数据 -->
+	
+	<update id="update-user" parameterClass="com.cqedu.bean.User">
+		update t_user set RNO=#role.id#,DID=#dept.id#,POSITION_ID=#posid#,NAME=#username#,PASSWORD=#password#,SEX=#sexy#,TELEPHONE=#phone#,MAIL=#email#,BIRTHDAY=#borndate#,CODE=#code#,ADDRESS=#address#,IDNUM=#idcardnum#
+			where id=#userid#
+	</update>
+	
+	
+	<!-- 选择部门编号和名称 -->
+	<select id="select-dept" resultClass="com.cqedu.bean.User">
+		select did as "dept.id",dname as "dept.name" from t_department
+	</select>
+	
+	
+	<!-- 选择职位编号和名称 -->
+	<select id="select-pos" resultClass="com.cqedu.bean.User">
+		select position_id as posid,position_name as posname from t_position
+	</select>
+	
+	
+	<!-- 选择角色编号和名称 -->
+	<select id="select-role" resultClass="com.cqedu.bean.User">
+		select rno as "role.id",rname as "role.name" from t_role
+	</select>
+	
+	<!-- 选择费用标准编号和名称 -->
+	<select id="select-fee" resultClass="com.cqedu.bean.User">
+		select FEEID as feeid,FEENAME as feename from T_FEE
+	</select>
+	
+	<!-- 角色权限分配 -->
+	<update id="insert-role-perm" parameterClass="com.cqedu.bean.User">
+		update t_role set pno=#pno# where rno=#role.id#
+	</update>
+	
+	<!-- 查看用户角色权限 -->
+	
+	<select id="slect-role-perm" resultClass="com.cqedu.bean.User">
+		select a.name as username,b.rname as "role.name",c.pname as posname from t_user a
+		join t_role b
+		on a.rno=b.rno
+		join t_permission c
+		on b.pno=c.pno
+		where a.id=#userid#
+	</select>
+	
+</sqlMap>
+
+
+

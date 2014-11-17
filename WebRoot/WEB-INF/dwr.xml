@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.org/dwr/dwr20.dtd">
+
+<dwr>
+
+<!--  
+	<allow>
+
+		<create creator="new" javascript="test">
+			<param name="class" value="com.fs.test.Test" />
+		</create>
+		
+		
+	</allow>
+-->
+	
+	<allow>
+		<create javascript="defineuser" creator="new">
+			<param name="class" value="com.cqedu.maintenance.user.service.impl.UserServiceImpl" />
+			<include method="checkUser(User userbean)"/>
+		</create>
+		
+		<convert match="com.cqedu.bean.User" converter="bean">
+			<param name="include" value="username,password"/>
+		</convert>
+	</allow>
+</dwr>

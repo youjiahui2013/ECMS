@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <package name="user" extends="struts-default" >
+    	<action name="query-user" class="AddUser" method="checkUser">
+    		<result name="success">
+    			/main.jsp
+    		</result>
+    		<result name="error">
+    			/error.jsp
+    		</result>
+    	</action>
+    	<action name="add-user" class="AddUser" method="addUser">
+    		<result name="success">
+    			/maintenance/success_insert.jsp
+    		</result>
+    	</action>
+    	
+    	<action name="select-user" class="AddUser" method="userList">
+    		<result name="success">
+    			/maintenance/user_info.jsp
+    		</result>
+    	</action>
+    	
+    	<action name="delete-user" class="AddUser" method="deleteUser">
+    		<result name="success">
+    			/error.jsp
+    		</result>
+    	</action>
+    	
+    	<action name="change-user" class="AddUser" method="changeUser">
+    		<result name="success">
+    			/maintenance/change_user.jsp
+    		</result>
+    	</action>
+    	
+    	
+    	<action name="update-user" class="AddUser" method="updateUser">
+    		<result name="success">
+    			/maintenance/success_update.jsp
+    		</result>
+    	</action>
+    	
+    	
+    	
+    	<action name="select-user-option" class="AddUser" method="selectOption">
+    		<result name="success">
+    			/maintenance/add_user.jsp
+    		</result>
+    	</action>
+		
+		<action name="login" class="AddUser" method="selectDiffUser">
+    		<result name="success">
+    			/list.jsp
+    		</result>
+    		
+    		<result name="error">
+    			/error.jsp
+    		</result>
+    	</action>
+		
+		<action name="view-perm" class="AddUser" method="viewPerm">
+    		<result name="success">
+    			/maintenance/view_perm.jsp
+    		</result>
+    	</action>
+		
+    	<action name="insert-role-perm" class="AddUser" method="insertRolePerm">
+    		<result name="success">
+    			/maintenance/role_set_success.jsp
+    		</result>
+    	</action>
+    	
+    </package>
+		
+</struts>
