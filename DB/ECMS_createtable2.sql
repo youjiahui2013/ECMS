@@ -10,7 +10,8 @@ rsum INT,
 rinfo VARCHAR(100),
 rremark VARCHAR(220),
 rtype VARCHAR(10),
-rpnum VARCHAR(10)
+rpnum VARCHAR(10),
+rdate VARCHAR(10)
 );
 
 CREATE TABLE t_reim_unit(

@@ -76,7 +76,30 @@ body {
                     <td>&nbsp;</td>
                   </tr>
                 </table></td>
-                <td width="220" valign="bottom"  nowrap="nowrap"><div align="right"><span class="STYLE1"><span class="STYLE2">■</span> 今天是：2009年9月11日 星期四</span></div></td>
+                <td width="220" valign="bottom"  nowrap="nowrap"><div align="right"><span class="STYLE1"><span class="STYLE2">■</span> 今天是：
+                <script language=JavaScript> 
+			today=new Date(); 
+			function initArray(){ 
+			this.length=initArray.arguments.length 
+			for(var i=0;i<this.length;i++) 
+			this[i+1]=initArray.arguments[i]} 
+			var d=new initArray( 
+			"星期日", 
+			"星期一", 
+			"星期二", 
+			"星期三", 
+			"星期四", 
+			"星期五", 
+			"星期六"); 
+				document.write( 
+				"<font  style='font-size:9pt;font-family: 宋体'> ", 
+				today.getFullYear(),"年", 
+				today.getMonth()+1,"月", 
+				today.getDate(),"日 ", 
+				d[today.getDay()+1], 
+				"</font>" ); 
+				</script> 
+</span></div></td>
               </tr>
             </table></td>
             <td width="21"><img src="image/main_11.gif" width="21" height="38"></td>

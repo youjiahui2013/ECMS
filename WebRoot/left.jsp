@@ -286,7 +286,7 @@ imgmenu.background="image/main_48.gif";
   <tr>
     <td height="18" background="image/main_58.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="18"><div align="center" class="STYLE3">°æ±¾£º2009V1.0</div></td>
+        <td height="18"><div align="center" class="STYLE3">°æ±¾£º2014V1.0</div></td>
       </tr>
     </table></td>
   </tr>
